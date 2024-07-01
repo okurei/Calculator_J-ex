@@ -1,44 +1,41 @@
 import java.util.Scanner;
 
-public class Operation {
+public class Operation{
+    private float num1;
+    private float num2;
+    private float result;
+    private String op;
 
-    public void scan(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Insert an operation, in the format (number sign number):");
-        float num1 = scanner.nextFloat();
-        char op = scanner.next().charAt(0);
-        float num2 = scanner.nextFloat();
-        scanner.close();
-        float result = setOp(op, num1, num2);
-        System.out.println(result);
+    private void scanIn() {
+        System.out.println("Insert operation with the format: Number Sign Number");
+        Scanner scan = new Scanner(System.in);
+            String input = scan.nextLine();
+            String[] tmp = input.split(" ");
+            try {
+                num1 = Integer.parseInt(tmp[0]);
+                num2 = Integer.parseInt(tmp[2]);
+                op = tmp[1];
+            } catch (Exception e) {
+                System.out.println("Invalid Input ");
+                scanIn();
+            }
     }
-
-    public float sum(float num1, float num2){
-        return num1 + num2;
-    }
-    public float subtraction(float num1, float num2){
-        return num1 - num2;
-    }
-    public float multiplication(float num1, float num2){
-        return num1 * num2;
-    }
-    public float division(float num1, float num2){
+    private float div(){
+        float tmp;
         if (num2 == 0){
-            return 0;
-        }
-        else{
-            return num1 / num2;
-        }
+            tmp = num2;
+        }else { tmp = num1 / num2;}
+        return tmp;
     }
-
-
-    public float setOp(char op, float num1, float num2){
-        return switch (op) {
-            case '+' -> sum(num1, num2);
-            case '-' -> subtraction(num1, num2);
-            case '*' -> multiplication(num1, num2);
-            case '/' -> division(num1, num2);
-            default -> 0;
-        };
+    public void operation(){
+        scanIn();
+        switch (op){
+            case "+" -> result = num1 + num2;
+            case "-" -> result = num1 - num2;
+            case "*" -> result = num1 * num2;
+            case "/" -> result = div();
+            default -> scanIn();
+        }
+        System.out.println(result);
     }
 }
