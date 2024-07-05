@@ -5,10 +5,10 @@ public class Operation{
     private float num2;
     private float result;
     private String op;
+    Scanner scan = new Scanner(System.in);
 
     private void scanIn() {
         System.out.println("Insert operation with the format: Number Sign Number");
-        Scanner scan = new Scanner(System.in);
             String input = scan.nextLine();
             String[] tmp = input.split(" ");
             try {
